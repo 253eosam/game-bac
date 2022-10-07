@@ -9,6 +9,11 @@ const myInputEl = ref<HTMLInputElement>()
 const myBtnEl = ref<HTMLButtonElement>()
 
 watch(gameStep, (newValue: number) => {
+  if (newValue !== 4) {
+    alert('준비중입니다.. 스텝 4에서만 게임해 주세요. 😅')
+    gameStep.value = 4
+    return
+  }
   if (newValue < MIN_GAME_STEP) {
     alert('게임 스텝은 3 이상이어야 합니다.')
     gameStep.value = MIN_GAME_STEP
