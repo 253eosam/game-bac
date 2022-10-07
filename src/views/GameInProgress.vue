@@ -8,7 +8,7 @@
             <input ref="inputEls" class="border-black border-2 text-center rounded-md w-full" type="number" v-model.number="inputs[i - 1]" @input="onInput(i - 1)" />
           </td>
           <td class="flex-1">
-            <input class="border-black border-2 text-center rounded-md w-full bg-black text-white font-semibold" @click="onSubmit" type="button" value="Shoot"/>
+            <input class="border-black border-2 text-center rounded-md w-full bg-black text-white font-semibold hover:bg-gray-800 cursor-pointer" @click="onSubmit" type="button" value="Shoot"/>
           </td>
         </tr>
       </thead>
@@ -83,6 +83,7 @@ export default defineComponent({
     }
     function clearInputs() {
       inputs.value = Array(gameStep.value).fill(null)
+    }
     function autoScroll () {
       nextTick(() => {
         tbodyEl.value.scrollTop = tbodyEl.value.scrollHeight
@@ -96,7 +97,6 @@ export default defineComponent({
       boards,
       tbodyEl,
       onSubmit() {
-        console.log("[🚀 253eosam] |  file: GameInProgress.vue |  line 91 |  onSubmit |  comAnswer.value", comAnswer.value)
         if (inputs.value.includes(null as any)) {
           alert('모든 입력란을 채워주세요.')
           return
