@@ -26,13 +26,13 @@ export default defineComponent({
   <div class="w-full my-center">
     <h1 class="mb-[100px] mt-[-100px]">야구공 찾기</h1>
     <div class="flex w-[80%] mx-auto border-2 rounded-xl border-black p-1">
-      <button @click="downGameStep" class="p-0 bg-white flex-2">
+      <button @click="downGameStep" class="p-0 bg-white flex-2 focus:outline-none">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
         </svg>
       </button>
       <input type="number" readonly name="gameStep" class="w-0 flex-1 outline-0 text-center bg-white" :value="gameStep"/>
-      <button @click="upGameStep" class="bg-white p-0 flex-2">
+      <button @click="upGameStep" class="bg-white p-0 flex-2 focus:outline-none">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
         </svg>
