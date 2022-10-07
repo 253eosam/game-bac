@@ -5,7 +5,7 @@
       <thead class="block w-full">
         <tr class="flex w-full">
           <td v-for="i in INPUT_COUNT" :key="`input-${i}`" class="flex-1">
-            <input ref="inputEls" class="border-black border-2 text-center rounded-md w-full" type="number" v-model.number="inputs[i - 1]" @input="onInput(i - 1)" />
+            <input ref="inputEls" class="bg-white border-black border-2 text-center rounded-md w-full" type="number" v-model.number="inputs[i - 1]" @input="onInput(i - 1)" />
           </td>
           <td class="flex-1">
             <input class="border-black border-2 text-center rounded-md w-full bg-black text-white font-semibold hover:bg-gray-800 cursor-pointer" @click="onSubmit" type="button" value="Shoot" />
