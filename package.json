@@ -2,15 +2,19 @@
   "name": "game-bac",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "dev": "vite",
     "tailcss": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
-    "build": "vue-tsc --noEmit && vite build",
+    "build:tailwind": "postcss src/style.css -o public/style.css",
+    "build": "npm run build:tailwind && vue-tsc --noEmit && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "autoprefixer": "^10.4.12",
     "lodash": "^4.17.21",
+    "postcss": "^8.4.17",
+    "postcss-cli": "^10.0.0",
     "vue": "^3.2.37",
     "vue-router": "^4.1.5"
   },
