@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full relative">
-    <h1 class="py-4 absolute top-6 w-full">SCORE BOARD</h1>
-    <table class="absolute flex flex-col-reverse top-[30%] left-2 right-2 bottom-2 border-0" @keyup.enter="onSubmit">
+    <h1 class="py-4 absolute top-2 w-full text-base font-serif">SCORE BOARD</h1>
+    <table class="absolute flex flex-col-reverse top-[5%] left-2 right-2 bottom-2 border-0" @keyup.enter="onSubmit">
       <thead class="block w-full">
         <tr class="flex w-full">
           <td v-for="i in INPUT_COUNT" :key="`input-${i}`" class="flex-1">
@@ -12,22 +12,22 @@
           </td>
         </tr>
       </thead>
-      <tbody class="block w-full h-5/6 mt-2 overflow-auto border py-2 mb-2">
+      <tbody ref="tbodyEl" class="block w-full h-5/6 mt-2 overflow-auto border py-2 mb-2">
         <template v-for="(board, bi) in boards" :key="`board-${bi}`">
           <tr class="flex w-full">
-            <td v-for="(v, vi) in board.arr" :key="`board-${bi}-${vi}`" class="flex-1">
-              <span class="font-semibold">
-                {{ v }}
-              </span>
-            </td>
-          </tr>
-          <tr class="flex w-full border-b mb-2 last:border-b-0">
             <td class="px-5 w-full text-right">
               <p class="font-semibold font-serif text-green-700 float-left">
                 {{ bi + 1 }}P
               </p>
               <span class="text-opacity-60 text-red-600">{{ board.strike }} 스트라이크</span> &nbsp;/&nbsp;
               <span class="text-opacity-60 text-blue-600">{{ board.ball }} 볼</span>
+            </td>
+          </tr>
+          <tr class="flex w-full border-b pb-2 last:border-b-0">
+            <td v-for="(v, vi) in board.arr" :key="`board-${bi}-${vi}`" class="flex-1">
+              <span class="font-semibold">
+                {{ v }}
+              </span>
             </td>
           </tr>
         </template>
