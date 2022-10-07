@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, onMounted, computed, watch, onBeforeMount } from 'vue'
+import { ref, defineComponent, onMounted, computed, onBeforeMount, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { isEqual } from 'lodash/fp'
 
@@ -58,6 +58,7 @@ export default defineComponent({
     const { currentRoute } = useRouter()
     const gameStep = ref<number>(DEFAULT_GAME_STEP)
     const cnt = ref(0)
+    const tbodyEl = ref()
 
     const comAnswer = computed(() => {
       const numbers = [0,1,2,3,4,5,6,7,8,9]
@@ -82,6 +83,10 @@ export default defineComponent({
     }
     function clearInputs() {
       inputs.value = Array(gameStep.value).fill(null)
+    function autoScroll () {
+      nextTick(() => {
+        tbodyEl.value.scrollTop = tbodyEl.value.scrollHeight
+      })
     }
 
     return {
@@ -89,6 +94,7 @@ export default defineComponent({
       inputs,
       inputEls,
       boards,
+      tbodyEl,
       onSubmit() {
         console.log("[🚀 253eosam] |  file: GameInProgress.vue |  line 91 |  onSubmit |  comAnswer.value", comAnswer.value)
         if (inputs.value.includes(null as any)) {
@@ -111,8 +117,10 @@ export default defineComponent({
           return
         }
 
+        autoScroll()
         clearInputs()
         focusFirstInput()
+
       },
       onInput(idx: number) {
         const value = String(inputs.value[idx])
