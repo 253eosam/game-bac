@@ -5,6 +5,8 @@ const { push } = useRouter()
 const MIN_GAME_STEP = 3
 const MAX_GAME_STEP = 5
 const gameStep = ref<number>(4)
+const myInputEl = ref<HTMLInputElement>()
+const myBtnEl = ref<HTMLButtonElement>()
 
 watch(gameStep, (newValue: number) => {
   if (newValue < MIN_GAME_STEP) {
@@ -22,22 +24,29 @@ watch(gameStep, (newValue: number) => {
 function startGame() {
   push({ path: '/in-progress', query: { gameStep: gameStep.value } })
 }
+
 </script>
 
 <template>
-<div class="w-full my-center">
-  <input type="number" name="gameStep" class="border w-[100px] px-2 py-1 mx-5 text-center rounded" v-model.number="gameStep"/>
-  <button @click="startGame" class=" bg-indigo-500 hover:bg-indigo-600 text-white">
-    START .. !
-  </button>
-</div>
+  <div class="w-full my-center">
+    <h1 class="mb-[100px] mt-[-100px]">Baseball Game</h1>
+    <div class="inline-block border-2 rounded-xl border-black">
+      <input type="number" name="gameStep" class="my-input mr-[-3px] w-[200px] py-1 text-center rounded" v-model.number="gameStep" />
+      <button  @click="startGame" class="m-[3px]  text-white bg-black hover:bg-gray-800">START .. !</button>
+    </div>
+  </div>
 </template>
 
-<style>
+<style scoped>
 .my-center {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+@media (max-width: 768px) {
+  .my-input {
+    width: 100px;
+  }
 }
 </style>
