@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "tailcss": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
-    "build:tailwind": "postcss ./src/input.css -o dist/output.css",
+    "build:tailwind": "postcss src/input.css -o dist/output.css",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview"
   },
