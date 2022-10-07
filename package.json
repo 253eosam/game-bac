@@ -8,7 +8,8 @@
     "tailcss": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
     "build:tailwind": "postcss src/input.css -o dist/output.css",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "firebase deploy"
   },
   "dependencies": {
     "autoprefixer": "^10.4.12",
