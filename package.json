@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "vite",
     "tailcss": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
-    "build:tailwind": "postcss src/style.css -o public/style.css",
-    "build": "vue-tsc --noEmit && vite build",
+    "build:tailwind": "postcss src/input.css -o dist/output.css",
+    "build": "npm run build:tailwind && vue-tsc --noEmit && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
