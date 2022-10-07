@@ -8,22 +8,20 @@
             <input ref="inputEls" class="border-black border-2 text-center rounded-md w-full" type="number" v-model.number="inputs[i - 1]" @input="onInput(i - 1)" />
           </td>
           <td class="flex-1">
-            <input class="border-black border-2 text-center rounded-md w-full bg-black text-white font-semibold hover:bg-gray-800 cursor-pointer" @click="onSubmit" type="button" value="Shoot"/>
+            <input class="border-black border-2 text-center rounded-md w-full bg-black text-white font-semibold hover:bg-gray-800 cursor-pointer" @click="onSubmit" type="button" value="Shoot" />
           </td>
         </tr>
       </thead>
-      <tbody ref="tbodyEl" class="block w-full h-5/6 mt-2 overflow-auto border py-2 mb-2">
+      <tbody ref="tbodyEl" class="block w-full h-5/6 mt-2 overflow-auto border mb-2">
         <template v-for="(board, bi) in boards" :key="`board-${bi}`">
           <tr class="flex w-full">
-            <td class="px-5 w-full text-right">
-              <p class="font-semibold font-serif text-green-700 float-left">
-                {{ bi + 1 }}P
-              </p>
+            <td class="px-5 py-1 w-full text-right">
+              <p class="font-semibold font-serif text-green-700 float-left">{{ bi + 1 }}P</p>
               <span class="text-opacity-60 text-red-600">{{ board.strike }} 스트라이크</span> &nbsp;/&nbsp;
               <span class="text-opacity-60 text-blue-600">{{ board.ball }} 볼</span>
             </td>
           </tr>
-          <tr class="flex w-full border-b pb-2 last:border-b-0">
+          <tr class="flex w-full pb-2 border-b last:border-b-0">
             <td v-for="(v, vi) in board.arr" :key="`board-${bi}-${vi}`" class="flex-1">
               <span class="font-semibold">
                 {{ v }}
@@ -42,13 +40,14 @@ import { useRouter } from 'vue-router'
 import { isEqual } from 'lodash/fp'
 
 interface Board {
-  isSuccess: boolean,
-  strike: number,
-  ball: number,
+  isSuccess: boolean
+  strike: number
+  ball: number
   arr: number[]
 }
 
 const DEFAULT_GAME_STEP = 4
+const GAME_LIFE = 10
 
 export default defineComponent({
   setup() {
@@ -61,11 +60,8 @@ export default defineComponent({
     const tbodyEl = ref()
 
     const comAnswer = computed(() => {
-      const numbers = [0,1,2,3,4,5,6,7,8,9]
-      return Array.from(
-        Array(gameStep.value),
-        () => numbers.splice(Math.floor(Math.random() * numbers.length), 1)[0]
-      )
+      const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+      return Array.from(Array(gameStep.value), () => numbers.splice(Math.floor(Math.random() * numbers.length), 1)[0])
     })
 
     onMounted(() => {
@@ -84,7 +80,7 @@ export default defineComponent({
     function clearInputs() {
       inputs.value = Array(gameStep.value).fill(null)
     }
-    function autoScroll () {
+    function autoScroll() {
       nextTick(() => {
         tbodyEl.value.scrollTop = tbodyEl.value.scrollHeight
       })
@@ -102,14 +98,14 @@ export default defineComponent({
           return
         }
 
-        cnt.value++;
+        cnt.value++
         const isSuccess = isEqual(comAnswer.value, inputs.value)
 
         boards.value.push({
           isSuccess,
           strike: inputs.value.filter((v, i) => v === comAnswer.value[i]).length,
           ball: inputs.value.filter((v, i) => v !== comAnswer.value[i] && comAnswer.value.includes(v)).length,
-          arr: [...inputs.value]
+          arr: [...inputs.value],
         })
 
         if (isSuccess) {
@@ -120,13 +116,12 @@ export default defineComponent({
         autoScroll()
         clearInputs()
         focusFirstInput()
-
       },
       onInput(idx: number) {
         const value = String(inputs.value[idx])
         if (!value) return
         inputs.value[idx] = parseInt(value.charAt(0))
-      }
+      },
     }
   },
 })
