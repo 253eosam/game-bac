@@ -9,9 +9,9 @@ const GameFinish = () => import('./views/GameFinish.vue')
 // Each route should map to a component.
 // We'll talk about nested routes later.
 const routes = [
-  { path: '/', component: GameReady },
-  { path: '/in-progress', component: GameInProgress },
-  { path: '/finish', component: GameFinish },
+  { name: 'ready', path: '/', component: GameReady },
+  { name: 'inProgress', path: '/in-progress', component: GameInProgress },
+  { name: 'finish', path: '/finish', component: GameFinish },
 ]
 
 

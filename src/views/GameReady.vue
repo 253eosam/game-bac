@@ -1,43 +1,45 @@
-<script setup lang="ts">
-import { ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
-const { push } = useRouter()
-const MIN_GAME_STEP = 3
-const MAX_GAME_STEP = 5
-const gameStep = ref<number>(4)
-const myInputEl = ref<HTMLInputElement>()
-const myBtnEl = ref<HTMLButtonElement>()
+<script lang="ts">
+  import { computed, defineComponent } from 'vue';
+  import { useRouter } from 'vue-router'
+  import useGameStep from '../hooks/useGameStep'
 
-watch(gameStep, (newValue: number) => {
-  if (newValue !== 4) {
-    alert('준비중입니다.. 스텝 4에서만 게임해 주세요. 😅')
-    gameStep.value = 4
-    return
-  }
-  if (newValue < MIN_GAME_STEP) {
-    alert('게임 스텝은 3 이상이어야 합니다.')
-    gameStep.value = MIN_GAME_STEP
-    return
-  }
-  if (newValue > MAX_GAME_STEP) {
-    alert('게임 스텝은 5 이하여야 합니다.')
-    gameStep.value = MAX_GAME_STEP
-    return
+export default defineComponent({
+  setup() {
+    const { push } = useRouter()
+    const { getGameStep, upGameStep, downGameStep } = useGameStep()
+    
+
+
+    return {
+      gameStep: computed(() => getGameStep()),
+      upGameStep, downGameStep,
+      onStartGame () {
+        push({ path: '/in-progress', query: { gameStep: getGameStep() } })
+      },
+    }
   }
 })
-
-function startGame() {
-  push({ path: '/in-progress', query: { gameStep: gameStep.value } })
-}
 
 </script>
 
 <template>
   <div class="w-full my-center">
-    <h1 class="mb-[100px] mt-[-100px]">Baseball Game</h1>
-    <div class="inline-block border-2 rounded-xl border-black">
-      <input type="number" name="gameStep" class="my-input mr-[-3px] w-[200px] py-1 text-center rounded" v-model.number="gameStep" />
-      <button  @click="startGame" class="m-[3px]  text-white bg-black hover:bg-gray-800">START .. !</button>
+    <h1 class="mb-[100px] mt-[-100px]">야구공 찾기</h1>
+    <div class="flex w-[80%] mx-auto border-2 rounded-xl border-black p-1">
+      <button @click="downGameStep" class="p-0 bg-white flex-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+      </button>
+      <input type="number" readonly name="gameStep" class="w-0 flex-1 outline-0 text-center bg-white" :value="gameStep"/>
+      <button @click="upGameStep" class="bg-white p-0 flex-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+        </svg>
+      </button>
+    </div>
+    <div class="mt-4">
+      <button  @click="onStartGame" class="m-[3px]  text-white bg-black hover:bg-gray-800">START .. !</button>
     </div>
   </div>
 </template>
@@ -48,10 +50,5 @@ function startGame() {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-@media (max-width: 768px) {
-  .my-input {
-    width: 100px;
-  }
 }
 </style>
