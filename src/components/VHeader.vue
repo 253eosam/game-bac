@@ -20,7 +20,11 @@ export default defineComponent({
         alert(infoComment)
       },
       refresh() {
-        router.push({ path: '/' })
+        if (router.currentRoute.value.name === 'ready') {
+          router.go(0)
+        } else {
+          router.push({ path: '/' })
+        }
       }
     }
   },
