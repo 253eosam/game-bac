@@ -1,17 +1,18 @@
 <template>
-  <div class="container">
+  <div id="container">
     <VModalVue />
-    <div id="wrap">
+    <div id="wrap" class="relative">
       <VHeader />
       <VContentVue />
-      <VBottom />
+      <VBottom v-if="hasBottom"/>
     </div>
 
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import VBottom from './VBottom.vue'
 import VContentVue from './VContent.vue'
 import VHeader from './VHeader.vue'
@@ -25,8 +26,20 @@ export default defineComponent({
     VModalVue
   },
   setup() {
+    const route = useRoute()
 
+    return {
+      hasBottom: computed(() => {
+        return route.meta?.hasBottom ?? false
+      })
+    }
   },
 })
 </script>
 
+<style scoped>
+#container, #wrap {
+  width: 100%;
+  height: 100%;
+}
+</style>

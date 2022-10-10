@@ -54,12 +54,13 @@ export default defineComponent({
 
 <style scoped>
 .gnb {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
   z-index: 999;
   border-bottom: 1px solid white;
+  min-height: 41px;
 }
 .v-header::after {
   content: '';

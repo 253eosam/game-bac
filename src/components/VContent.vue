@@ -1,13 +1,33 @@
 <template>
-  <div class="content">
-    <router-view class="relative" />
+  <div id="content" :class="bottom">
+    <router-view />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
+import { useRoute } from 'vue-router'
 
 export default defineComponent({
-  setup() {},
+  setup() {
+    const route = useRoute()
+
+    const hasBottom = computed(() => {
+      return route.meta?.hasBottom ?? false
+    })
+
+    return {
+      bottom: hasBottom ? 'bottom-[30%]' : 'bottom-[0]'
+    }
+  },
 })
 </script>
+
+<style scoped>
+#content {
+  position: absolute;
+  top: 41px;
+  left: 0;
+  right: 0;
+}
+</style>

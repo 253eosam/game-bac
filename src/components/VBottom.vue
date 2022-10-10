@@ -16,7 +16,7 @@ export default defineComponent({
 
 <style scoped>
 .bottom {
-    position: fixed;
+    position: absolute;
     display: flex;
     left: 0;
     bottom: 0;

@@ -1,7 +1,5 @@
 <template>
-  <div class="app-wrap">
-    <VContainer />
-  </div>
+  <VContainer />
 </template>
 
 <script lang="ts">
@@ -17,11 +15,3 @@ export default defineComponent({
   },
 })
 </script>
-
-<style>
-input[type='number']::-webkit-outer-spin-button,
-input[type='number']::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-</style>
