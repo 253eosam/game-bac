@@ -58,7 +58,7 @@ export default defineComponent({
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 999;
   border-bottom: 1px solid white;
 }
 .v-header::after {
