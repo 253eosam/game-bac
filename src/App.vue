@@ -1,19 +1,16 @@
 <template>
-  <div class="w-full border-white border-2 p-2 rounded-md">
-    <VHeader />
+  <div class="app-wrap">
     <VContainer />
   </div>
 </template>
 
 <script lang="ts">
-import VHeader from './components/VHeader.vue'
 import VContainer from './components/VContainer.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   components: {
     VContainer,
-    VHeader,
   },
   setup() {
     
@@ -21,3 +18,10 @@ export default defineComponent({
 })
 </script>
 
+<style>
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+</style>

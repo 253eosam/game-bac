@@ -1,30 +1,40 @@
-<script setup lang="ts">
-</script>
-
 <template>
   <div class="container">
-    <div class="h-[32rem] bg-white rounded-lg">
-      <router-view class="absolute center-absolute " />
+    <input type="checkbox" id="toggle" v-model="toggle">
+    <div id="wrap">
+      <VHeader />
+      <VContentVue />
+      <VBottom />
     </div>
   </div>
 </template>
 
-<style>
-.container {
-  position: relative;
-}
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import VBottom from './VBottom.vue'
+import VContentVue from './VContent.vue'
+import VHeader from './VHeader.vue'
+export default defineComponent({
+  components: {
+    VHeader,
+    VBottom,
+    VContentVue
+  },
+  setup() {
+    const toggle = ref(false)
 
-.center-absolute {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+    return {
+      toggle,
+    }
+  },
+})
+</script>
 
-input[type='number']::-webkit-outer-spin-button,
-input[type='number']::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+
+<style scoped>
+/* 토글 */
+#toggle { display: none; }
+#toggle + #wrap > #toggle_gnb_wrap { display: none; }
+#toggle:checked + #wrap > #toggle_gnb_wrap { display: block; }
 
 </style>
