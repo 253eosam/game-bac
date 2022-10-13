@@ -1,67 +1,50 @@
 <template>
   <div class="absolute flex w-full">
-    <div class="card w-10 h-10 rounded border-y flex-1 hover:shadow-lg my-5 cursor-pointer origin-center hover:h-[130px]"
-      :class="`border-${COLORS[0]}-500 hover:shadow-${COLORS[0]}-500`"
-    >
-      <p class="title text-center leading-10">야구공 맞추기</p>
-      <p class="subtitle px-3">
-        0 ~ 9까지 숫자가 랜덤하게 위치하고 있습니다. <br>
-        숫자를 맞춰보세요!
-      </p>
-      <a href="#" @click.prevent="startGame(0)" class="card-tool inline-block float-right px-3" :class="`text-${COLORS[0]}-500`">게임하기</a>
-    </div>
+    <GameSelection
+      v-for="({ id, onClickStartGame, title, description, color }, idx) in gameSelections" 
+      :key="id" 
+      @onClickStartGame="onClickStartGame"
+      :title="`${idx+1}. ${id} - ${title}`" 
+      :description="description"
+      :color="color"
+      class="border-blue-500 hover:shadow-blue-500"
+    />
+    <!-- NOTE: 색상부분 동적으로 적용이 안됨. -->
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
-const GAME_INDEX = ['Baseball']
-const COLORS = ['violet']
+import GameSelection from '@src/components/home/GameSelection.vue'
+
+type TGameSelection = {
+  id: string
+  title: string
+  description: string
+  color: string
+  onClickStartGame: () => void
+}
 
 export default defineComponent({
+  components: {
+    GameSelection,
+  },
   setup() {
     const { push } = useRouter()
     return {
-      COLORS,
-      startGame: (gameId: number) => {
-        push({ name: GAME_INDEX[gameId] })
-      }
+      gameSelections: [
+        {
+          id: 'Baseball',
+          title: '야구공 맞추기',
+          description: `0 ~ 9까지 숫자가 랜덤하게 위차히고 있습니다.<br>숫자를 맞춰보세요!`,
+          color: 'blue',
+          onClickStartGame() {
+            push({ name: 'Baseball' })
+          },
+        },
+      ] as TGameSelection[],
     }
   },
 })
 </script>
-
-<style scoped>
-.card {
-  transition: height 0.5s, box-shadow 0.5s;
-}
-.subtitle {
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0.5s, opacity 0.5s;
-}
-.title {
-  transition: font-size 0.5s, font-weight 0.5s;
-}
-.card:hover > .title {
-  font-size: 1.3rem;
-  font-weight: 800;
-  transition: font-size 0.5s, font-weight 0.5s;
-}
-.card:hover > .subtitle {
-  visibility: visible;
-  opacity: 1;
-  transition: visibility 1s linear 0s, opacity 1s;
-}
-.card-tool {
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0.5s, opacity 0.5s;
-}
-.card:hover > .card-tool {
-  visibility: visible;
-  opacity: 1;
-  transition: visibility 2.5s linear 0s, opacity 2.5s;
-}
-</style>
