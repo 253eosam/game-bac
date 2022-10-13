@@ -2,7 +2,7 @@
   "name": "game-bac",
   "private": true,
   "version": "0.0.0",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "tailcss": "npx tailwindcss -i ./src/input.css -o ./output.css --watch",
