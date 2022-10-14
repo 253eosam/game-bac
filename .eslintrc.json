@@ -1,0 +1,43 @@
+{
+    "root": true,
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": [
+        "eslint:recommended"
+    ],
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "semi": [
+            "error",
+            "never"
+        ],
+        "no-console": "warn",
+        "no-unused-vars": "off"
+    },
+    "overrides": [
+        {
+            "files": [
+                "*.ts"
+            ],
+            "parser": "@typescript-eslint/parser"
+        },
+        {
+            "files": [
+                "*.vue"
+            ],
+            "plugins": [
+                "vue"
+            ],
+            "extends": "plugin:vue/base",
+            "parserOptions": {
+                "parser": {
+                    "ts": "@typescript-eslint/parser"
+                }
+            }
+        }
+    ]
+}
