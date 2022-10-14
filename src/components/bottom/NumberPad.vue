@@ -1,7 +1,7 @@
 <template>
   <ul class="w-full flex flex-col p-2">
     <li v-for="(row, y) in pad" :key="`row-${y}`" class="flex-1 flex items-center">
-      <button v-for="(val, x) in row" :key="`col-${x}`" class="border mx-2 h-3/4 border-gray-300 rounded-full flex-1" @click="onClick(val)">
+      <button v-for="(val, x) in row" :key="`col-${x}`" class="border-4 mx-2 h-3/4 border-gray-300 rounded-full flex-1" @click="onClick(val)">
         {{ val }}
       </button>
     </li>
