@@ -6,9 +6,11 @@ export default defineComponent({
   setup() {
     const router = useRouter()
     const curRouteName = computed(() => router.currentRoute.value.name)
+    const curRoutePath = computed(() => router.currentRoute.value.path)
 
     return {
       curRouteName,
+      curRoutePath,
       info() {
         const gameInfo = `
           1. 숫자야구 게임은 1부터 9까지 서로 다른 숫자로 이루어진 단계별로 N자리의 수를 맞추는 게임입니다.
@@ -19,11 +21,14 @@ export default defineComponent({
         alert(gameInfo)
       },
       refresh() {
-        if (router.currentRoute.value.name === 'ready') {
+        if (router.currentRoute.value.name === 'Baseball') {
           router.go(0)
         } else {
           router.push({ path: '/' })
         }
+      },
+      home() {
+        router.push({ path: '/' })
       },
     }
   },
@@ -40,7 +45,7 @@ export default defineComponent({
       </button>
 
       <h1 class="flex-1 text-center">
-        <router-link to="/" class="transition-colors text-white text-2xl font-bold leading-[1.5rem]">{{ curRouteName }}</router-link>
+        <router-link :to="curRoutePath" class="transition-colors text-white text-2xl font-bold leading-[1.5rem]">{{ curRouteName }}</router-link>
       </h1>
 
       <button class="p-0 bg-white text-black mx-1 flex-none" @click="refresh">
@@ -49,7 +54,7 @@ export default defineComponent({
         </svg>
       </button>
 
-      <button class="p-0 bg-white text-black mx-1 flex-none">
+      <button class="p-0 bg-white text-black mx-1 flex-none" @click="home">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
