@@ -12,9 +12,21 @@
   <link rel="mask-icon" href="/src/assets/safari-pinned-tab.svg" color="#5bbad5">
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+  <script src="./src/utils/confetti_v2.js"></script>
+  <style>
+    canvas{z-index:10000;pointer-events: none;position: fixed;top: 0;transform: scale(1.1);}
+  </style>
+</head>
+<body>
+  <div id="congratulation">
+    <canvas id="canvas"></canvas>
+    <div class="buttonContainer hidden">
+      <button class="canvasBtn" id="stopButton">Stop Confetti</button>
+      <button class="canvasBtn" id="startButton">Drop Confetti</button>	
+    </div>
+  </div>
+  <div id="app"></div>
+  <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

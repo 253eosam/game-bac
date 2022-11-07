@@ -2,7 +2,10 @@
   <div class="h-full p-2 bg-white relative text-black text-center">
     <table class="w-full h-full overflow-auto border-0 flex flex-col-reverse">
       <thead class="mt-1">
-        <tr class="flex">
+        <tr v-if="comIsSuccessful" class="block text-center">
+          <strong class="congratulation-text">🎉 Congratulations 🎉</strong>
+        </tr>
+        <tr v-else class="flex">
           <td v-for="i in inputNumber" :key="`input-${i}`" class="flex-1">
             <input :data-idx="i - 1" ref="inputEls" class="bg-white border-black border-2 text-center cursor-pointer rounded-md w-full" type="number" readonly :value="inputs[i - 1]" @click="focusInputEl(i - 1)" />
           </td>
@@ -17,7 +20,7 @@
               <span class="text-opacity-60 text-blue-600">{{ ball }} 볼</span>
             </td>
           </tr>
-          <tr class="flex w-full pb-2 border-b last:border-b-0">
+          <tr class="flex w-full pb-2 border-b">
             <td v-for="(v, vi) in board" :key="`board-${bi}-${vi}`" class="flex-1">
               <span class="font-semibold">
                 {{ v }}
@@ -32,7 +35,7 @@
 
 <script lang="ts">
 import useBaseBallGame from '@src/hooks/useBaseballGame'
-import { computed, defineComponent, onMounted, ref, watch } from 'vue'
+import { computed, defineComponent, nextTick, onMounted, ref, watch } from 'vue'
 import { useDeliveryTop } from '../hooks/useDeliveryTop'
 import type { NumberPad } from '@src/components/bottom/NumberPad.vue'
 import { Nullable } from '../types/global'
@@ -40,6 +43,7 @@ import { Nullable } from '../types/global'
 export default defineComponent({
   setup() {
     const { comBoard: boards, getGameStep, submit, comIsSuccessful, getAnswer } = useBaseBallGame()
+    const tbodyEl = ref<Nullable<HTMLTableSectionElement>>(null)
     const inputs = ref<Nullable<number>[]>(Array(getGameStep()).fill(null))
     const inputEls = ref<HTMLInputElement[]>([])
     const focusInputEl = (idx: number) => {
@@ -48,7 +52,13 @@ export default defineComponent({
       inputEls.value[idx].classList.add('bg-yellow-200', 'active')
     }
     const clearInput = () => inputs.value.fill(null) && focusInputEl(0)
+    const autoScroll = () => {
+      if (!tbodyEl.value) return
 
+      nextTick(() => {
+        tbodyEl.value!.scrollTop = tbodyEl.value!.scrollHeight
+      })
+    }
     useDeliveryTop((np: NumberPad) => {
       const target = inputEls.value.findIndex((el) => el.classList.contains('active'))
       if (target === -1) return
@@ -59,6 +69,7 @@ export default defineComponent({
         try {
           submit(inputs.value)
           clearInput()
+          autoScroll()
         } catch (err: any) {
           alert(err.message)
         }
@@ -69,18 +80,27 @@ export default defineComponent({
     })
 
     onMounted(() => {
+      console.log(getAnswer())
+      
       if (inputEls.value && 0 < inputEls.value.length) {
         focusInputEl(0)
       }
     })
 
-    watch(comIsSuccessful, (isSuccessful: boolean) => {
+    watch(comIsSuccessful, (isSuccessful) => {
       if (isSuccessful) {
-        alert('성공!')
+        const startEl: HTMLButtonElement | null = document.querySelector('#startButton')
+        const stopEl: HTMLButtonElement | null = document.querySelector('#stopButton')
+        startEl!.click()
+        setTimeout(() => {
+          stopEl!.click()
+        }, 5000)
       }
     })
 
     return {
+      comIsSuccessful,
+      tbodyEl,
       focusInputEl,
       inputs,
       inputEls,
@@ -90,3 +110,19 @@ export default defineComponent({
   },
 })
 </script>
+
+<style scoped>
+
+.congratulation-text {
+  animation: 2s anim infinite alternate;
+}
+
+@keyframes anim {
+  0% { color: black; }
+  20%{ color: blue; }
+  40%{ color: green;}
+  60%{ color: orange;}
+  100% { color: red; }
+}
+
+</style>
