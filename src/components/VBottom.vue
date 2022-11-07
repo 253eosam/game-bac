@@ -1,15 +1,23 @@
 <template>
   <div class="bottom">
-    <router-view name="bottom"/>
+    <router-view name="bottom" @deliveryTop="deliveryTop"/>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { getCurrentInstance } from 'vue'
 
 export default defineComponent({
   setup() {
-    
+    const internalInstance = getCurrentInstance()
+    const emitter = internalInstance?.appContext.config.globalProperties.emitter
+
+    return {
+      deliveryTop(payload: any) {
+        emitter.emit('deliveryTop', payload)
+      }
+    }
   },
 })
 </script>

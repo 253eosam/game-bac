@@ -40,7 +40,7 @@ export default defineComponent({
       </button>
 
       <h1 class="flex-1 text-center">
-        <router-link to="/" class="transition-colors text-white text-2xl font-bold leading-[1.5rem] hover:text-blue-500">{{ curRouteName }}</router-link>
+        <router-link to="/" class="transition-colors text-white text-2xl font-bold leading-[1.5rem]">{{ curRouteName }}</router-link>
       </h1>
 
       <button class="p-0 bg-white text-black mx-1 flex-none" @click="refresh">

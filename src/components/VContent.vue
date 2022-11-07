@@ -1,6 +1,10 @@
 <template>
   <div id="content" :class="bottom">
-    <router-view />
+    <router-view v-slot="{ Component }">
+      <transition name="bounce">
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </div>
 </template>
 
@@ -17,7 +21,7 @@ export default defineComponent({
     })
 
     return {
-      bottom: hasBottom ? 'bottom-[30%]' : 'bottom-[0]'
+      bottom: hasBottom ? 'bottom-[30%]' : 'bottom-[0]',
     }
   },
 })
@@ -29,5 +33,20 @@ export default defineComponent({
   top: 41px;
   left: 0;
   right: 0;
+}
+
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>

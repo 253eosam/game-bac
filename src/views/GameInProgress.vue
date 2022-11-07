@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full relative">
     <h1 class="py-4 absolute top-2 w-full text-base font-serif">SCORE BOARD</h1>
-    <table class="absolute flex flex-col-reverse top-[5%] left-2 right-2 bottom-2 border-0" @keyup.enter="onSubmit">
+    <table class="absolute flex flex-col-reverse top-[5%] left-2 right-2 bottom-2 border-0">
       <thead class="block w-full">
         <tr class="flex w-full">
           <td v-for="i in INPUT_COUNT" :key="`input-${i}`" class="flex-1">
