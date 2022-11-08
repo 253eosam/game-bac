@@ -36,8 +36,8 @@ export default defineComponent({
       gameSelections: [
         {
           id: 'Baseball',
-          title: '야구공 맞추기',
-          description: `0 ~ 9까지 숫자가 랜덤하게 위차히고 있습니다.<br>숫자를 맞춰보세요!`,
+          title: '숫자 야구 게임',
+          description: `0 ~ 9까지 숫자가 랜덤하게 위치히고 있습니다.<br>각 위치에 맞는 숫자를 맞춰보세요!`,
           color: 'blue',
           onClickStartGame() {
             push({ name: 'Baseball' })
