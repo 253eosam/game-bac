@@ -1,6 +1,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
+import Swal from 'sweetalert2'
 
 export default defineComponent({
   setup() {
@@ -11,14 +12,17 @@ export default defineComponent({
     return {
       curRouteName,
       curRoutePath,
-      info() {
-        const gameInfo = `
-          1. 숫자야구 게임은 1부터 9까지 서로 다른 숫자로 이루어진 단계별로 N자리의 수를 맞추는 게임입니다.
-          2. 같은 숫자가 같은 자리에 있으면 스트라이크, 다른 자리에 있으면 볼, 같은 숫자가 전혀 없으면 낫싱입니다.
-          3. 단계별로 N개의 숫자를 모두 맞히면 게임이 끝나고, 게임을 새로 시작하려면 상단의 새로고침 버튼을 클릭하세요.
-          4. 게임을 새로 시작하면 새로운 숫자가 정해집니다.
-        `
-        alert(gameInfo)
+      option() {
+        Swal.fire({
+          icon: 'info',
+          title: '서비스 미지원',
+          text: '게임의 품질을 높이기 위한 몇가지 옵션을 추가 개발중입니다.',
+          footer: `<figure class="text-center">
+                  <img class="h-[250px] inline-block" alt="toss qr code" src="https://lh3.googleusercontent.com/fife/AAbDypBFUqeiLiFdXm3vnN_pJGVSHPZQU4LQpVvLulvHlPgtCccHIRzHHSMMtN8CWTzP4gs-ljDl_8iu3EM1Oov6sjPpzsB7aRNfTu6_3M9VG-vWKgmnNEfhFdWmyZOnZXJy2fjhjplUg3fYgeCt-hBysZP7GA7ACI4_OHRinOFI9R1nWKYY0QtXA_iyK3XmvvnNlaJbzY0oHJu0AJssW-8GFE-LbNo5ntsjHF9pr9RmBJ6rbc598YiqmgCipxwr5d7qwomWOcIPoBhTwzwP3HIGnvSEdu5VI5i7Gsx7RJltLPd44S00gpYVghvtwUe-b7VQVsJ3eid51UP3lYeFDbw1p2BI5QVxvaTL83oI_lRFfdAJByEInfsnM2Vuk1-BYJmMdR-6C4KpUWIlOnayjckYbctmvPBuRm1LFqzIY5veZXU64hcsDZ6EHeUHhciw6F03sX9v3wRLfMcwV3vfNJ0ozSBJa94W8CC-Yz8rWixOb5oSoZVf91jjMuQi0ndUBiYnYUsSa30dqiQX950IrgjJH_qZ-n2h8w9SB-tqDj88YjOBGkCIA8Da3MEkTZlJhyRRKp8oCZweHmR1aUaerETGDZrARVpLlumnvpiqwRiPkI6tt0Ic_0n4kHIpUAAXMvcYTo8ko_-qltQmSab5tV01kZXXuISnSjsQEe6pmkzgLPcKCR_rHku_J-lzo55hfCSvd2Iycku5d17a57F-xOnUtbuq7JPYpvmVE0rtpichp6vbJk9XwnUkFGyd6U8xyL3xkE1c0RvM7_2M2GVkukYbmNskpS98S15LDtko6a8Za0cNz-0HaWf44OT4mXv2I8SdwtR-DFKY2rEY1bJO05R1PmmfEjeHqy2YNcOIuTtl022aHUGMQ5RcZoMR8ukVSQTcRFJ1W3leIZpSm0gboh6iSQRXuiWSdMNfT64pEz7GpXh2GwD3kp298Utl6bkM6MJpQaKTMNRdYXmO-8kAOOeZHnQ2W0eeAuRbe3sV6cRJLZd2tUGto9QGY3ZHf91WeCo3mgsKvBgdVtaItAPJSsznIlJRNGzBKUr8t62veCyo-Sw5Ggd_w9xzECV7uW8td_0N73Zf2epoJJb5qu7NOL1329J-DBalqbdPfj1f8XdxVnNznRDkfNgm6rfmNIMP4sYQT7YHbBXaK5Gv3osNeiuvBGmjdHig1XflUPXgeknSWLY2RC6uIOIQxySitbhIJrwlWOb7REnaIq5QD4KFvkH5-uYJMK5AQxTzJcV_zCK7RyNsI2d6vkNcLfQDNlQLcJv6B4LflP1f90uZC7cDtQ-oOzv82430STiSU24B8ruCXiNifkyk4O_IArCxn1-m0qnmL_0RCfJ-7msKdJ7b2T9n0FkJ0R6cFHyASKpp1LcsUYHSgxbXilzc0TLDjrA6E7jocla77fLX7xgvSg69CaxCBkQhysVVnIxMYWjvMK5TtYb-s2otOQ77GgWs8nY9tv-8j9Eohpvsee7pMVcePes=w1440-h2424"/>
+                  <figcaption>고생하는 개발자를 위해서 커피한잔 사주기</figcaption>
+                  </figure>
+                  `,
+        })
       },
       refresh() {
         if (router.currentRoute.value.name === 'Baseball') {
@@ -38,14 +42,14 @@ export default defineComponent({
 <template>
   <header class="gnb">
     <nav class="flex w-full h-[41px] bg-black rounded-lg py-2">
-      <button class="p-0 bg-white text-black mx-1 flex-none" @click="info">
+      <button class="p-0 bg-white text-black mx-1 flex-none" @click="option">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
         </svg>
       </button>
 
-      <h1 class="flex-1 text-center">
-        <router-link :to="curRoutePath" class="transition-colors text-white text-2xl font-bold leading-[1.5rem]">{{ curRouteName }}</router-link>
+      <h1 class="flex-1 text-center text-white text-2xl font-bold leading-[1.5rem]">
+        {{ curRouteName }}
       </h1>
 
       <button class="p-0 bg-white text-black mx-1 flex-none" @click="refresh">
