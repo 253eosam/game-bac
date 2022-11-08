@@ -39,6 +39,7 @@ import { computed, defineComponent, nextTick, onMounted, ref, watch } from 'vue'
 import { useDeliveryTop } from '../hooks/useDeliveryTop'
 import type { NumberPad } from '@src/components/bottom/NumberPad.vue'
 import { Nullable } from '../types/global'
+import Swal from 'sweetalert2'
 
 export default defineComponent({
   setup() {
@@ -71,7 +72,11 @@ export default defineComponent({
           clearInput()
           autoScroll()
         } catch (err: any) {
-          alert(err.message)
+          Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: err.message,
+          })
         }
       } else {
         inputs.value[target] = np

@@ -25,13 +25,13 @@ export default function useBaseBallGame() {
   })
   const validate = (items: Nullable<number>[]) => {
     if (items.length !== getGameStep()) {
-      throw new Error('Invalid board item length')
+      throw new Error('비어있는 입력공간이 있습니다.', { cause: 'Invalid board item length'})
     }
     if (items.some((item) => isNull(item) || !(0 <= item && item <= 9))) {
-      throw new Error('Invalid board item value')
+      throw new Error('비어있는 입력공간이 있거나 잘못된 입력이 존재합니다. 확인 후 다시 제출바랍니다.', { cause: 'Invalid board item value'})
     }
     if (new Set(items).size !== items.length) {
-      throw new Error('Duplicated board item value')
+      throw new Error('중복된 숫자가 존재합니다. 숫자가 겹치지않게 입력해주세요.', { cause: 'Duplicated board item value'})
     }
   }
   const getStrike = (items: BoardItem) => {
