@@ -1,10 +1,13 @@
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Swal from 'sweetalert2'
+import { useEasterEgg } from '@src/store/easterEgg'
 
 export default defineComponent({
   setup() {
+    const ee = useEasterEgg()
+    const easterEggCnt = ref(0)
     const router = useRouter()
     const curRouteName = computed(() => router.currentRoute.value.name)
     const curRoutePath = computed(() => router.currentRoute.value.path)
@@ -34,6 +37,14 @@ export default defineComponent({
       home() {
         router.push({ path: '/' })
       },
+      easterEgg() {
+        if (++easterEggCnt.value % 20 !== 0) return
+
+        switch(curRouteName.value) {
+          case 'Baseball':
+            alert(ee.comData);
+        }
+      }
     }
   },
 })
@@ -49,7 +60,7 @@ export default defineComponent({
       </button>
 
       <h1 class="flex-1 text-center text-white text-2xl font-bold leading-[1.5rem]">
-        {{ curRouteName }}
+        <button @click="easterEgg">{{ curRouteName }}</button>
       </h1>
 
       <button class="p-0 bg-white text-black mx-1 flex-none" @click="refresh">

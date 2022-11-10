@@ -9,19 +9,20 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 export default defineComponent({
   setup() {
     const route = useRoute()
+    const bottom = ref('')
 
-    const hasBottom = computed(() => {
-      return route.meta?.hasBottom ?? false
-    })
+    watch(() => route.meta?.hasBottom, (hasBottom) => {
+      bottom.value = hasBottom ? 'bottom-[30%]' : 'bottom-[0]'
+    }, { immediate: true })
 
     return {
-      bottom: hasBottom ? 'bottom-[30%]' : 'bottom-[0]',
+      bottom
     }
   },
 })

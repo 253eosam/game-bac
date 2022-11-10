@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute flex w-full">
+  <div class="absolute flex flex-col w-full">
     <GameSelection
       v-for="({ id, onClickStartGame, title, description, color }, idx) in gameSelections" 
       :key="id" 
@@ -7,7 +7,7 @@
       :title="`${idx+1}. ${id} - ${title}`" 
       :description="description"
       :color="color"
-      class="border-blue-500 hover:shadow-blue-500"
+      class="border-blue-500 hover:shadow-blue-500 basis-0 flex-1"
     />
     <!-- NOTE: 색상부분 동적으로 적용이 안됨. -->
   </div>

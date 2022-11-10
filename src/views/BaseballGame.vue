@@ -60,6 +60,7 @@ import { useDeliveryTop } from "../hooks/useDeliveryTop"
 import type { NumberPad } from "@src/components/bottom/NumberPad.vue"
 import { Nullable } from "../types/global"
 import Swal from "sweetalert2"
+import { useEasterEgg } from '../store/easterEgg';
 
 export default defineComponent({
   setup() {
@@ -70,6 +71,7 @@ export default defineComponent({
       comIsSuccessful,
       getAnswer,
     } = useBaseBallGame()
+    const { setData } = useEasterEgg()
     const tbodyEl = ref<Nullable<HTMLTableSectionElement>>(null)
     const inputs = ref<Nullable<number>[]>(Array(getGameStep()).fill(null))
     const inputEls = ref<HTMLInputElement[]>([])
@@ -115,8 +117,7 @@ export default defineComponent({
     })
 
     onMounted(() => {
-      console.log(getAnswer())
-
+      setData(getAnswer())
       if (inputEls.value && 0 < inputEls.value.length) {
         focusInputEl(0)
       }

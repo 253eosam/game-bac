@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 
-export const useBottom = defineStore('bottom', () => {
+export const useEasterEgg = defineStore('easterEgg', () => {
   const data = ref<any>('')
   
   return {
-    submit (pValue: any) { 
+    setData (pValue: any) { 
       data.value = pValue 
     },
-    getValue: computed(() => data.value),
+    comData: computed(() => data.value),
   }
 })

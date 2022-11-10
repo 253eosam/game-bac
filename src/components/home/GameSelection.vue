@@ -1,5 +1,5 @@
 <template>
-  <div class="card w-10 h-14 rounded border-y-2 flex-1 hover:shadow-lg my-5 cursor-pointer origin-center hover:h-[150px]">
+  <div class="card h-14 rounded border-y-2 hover:shadow-lg my-5 cursor-pointer origin-center hover:h-[150px]">
     <p class="title text-center text-xl leading-[3.25rem]">{{ title }}</p>
     <p class="subtitle px-3" v-html="comDescription" /> 
     <a href="#" @click.prevent="onClickStartGame" class="card-tool inline-block float-right px-5 text-lg font-semibold" :class="`text-${color}-500`">게임하기</a>
