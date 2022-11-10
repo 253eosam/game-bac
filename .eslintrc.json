@@ -5,13 +5,22 @@
         "es6": true,
         "node": true
     },
+    "plugins": [],
     "extends": [
-        "eslint:recommended"
+        "@vue/eslint-config-prettier",
+        "plugin:vue/recommended"
     ],
     "parserOptions": {
         "sourceType": "module"
     },
     "rules": {
+        "prettier/prettier": [
+            "errors",
+            {
+                "singleQuote": true,
+                "semi": false
+            }
+        ],
         "semi": [
             "error",
             "never"
