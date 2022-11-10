@@ -43,6 +43,15 @@ export default defineComponent({
             push({ name: 'Baseball' })
           },
         },
+        {
+          id: 'Correct Color',
+          title: '올바른 색깔 맞추기',
+          description: `화면에 나오는 글자와 색상이 같으면 빠르게 터치해주세요!`,
+          color: 'pink',
+          onClickStartGame() {
+            push({ name: 'CorrectColor' })
+          },
+        }
       ] as TGameSelection[],
     }
   },
