@@ -13,6 +13,14 @@ export default defineConfig({
     vue(),
   ],
   build: {
-    outDir: 'dist',
+    rollupOptions: {
+			output: {
+				dir: 'dist',
+				entryFileNames: 'app-[name].js',
+				assetFileNames: 'app-[name].css',
+				chunkFileNames: "chunk-[name].js",
+				manualChunks: undefined,
+			}
+		}
   },
 })
