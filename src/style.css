@@ -21,8 +21,8 @@ body {
 
 }
 
-input:focus, button:focus {
-  outline: none;
+button, input, .m-tap-highlight {
+  -webkit-tap-highlight-color : transparent !important;
 }
 
 
