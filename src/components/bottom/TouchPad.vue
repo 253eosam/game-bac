@@ -1,7 +1,8 @@
 <template>
   <div class="flex h-full w-full">
-    <button @click="onClickPositive" class="flex-1 shrink border-r-[.5px]"><img src="@src/assets/o.png" alt="o" class="h-full w-full"></button>
-    <button @click="onClickNegative" class="flex-1 shrink border-l-[.5px]"><img src="@src/assets/x.png" alt="x" class="h-full w-full"></button>
+    <button @click="onClickPositive" class="transition-transform active:scale-90 flex-1 shrink"><img draggable="false" src="@src/assets/o.png" alt="o" class="h-full w-full"></button>
+    <div class="border border-white"></div>
+    <button @click="onClickNegative" class="transition-transform active:scale-90 flex-1 shrink"><img draggable="false" src="@src/assets/x.png" alt="x" class="h-full w-full"></button>
   </div>
 </template>
 
