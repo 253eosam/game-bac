@@ -8,10 +8,8 @@ const useColors = () => {
     'blue': '파랑',
     'green': '초록',
     'yellow': '노랑',
-    'orange': '주황',
     'purple': '보라',
     'white': '하양',
-    'brown': '갈색',
     'pink': '분홍',
   } as const
   type EngColor = keyof typeof colors
@@ -43,7 +41,8 @@ const useColors = () => {
 }
 
 const useCorrectColorGame = () => {
-  const TIME_LIMIT = 20 // 10초
+  const TIME_INTERVAL = 50
+  const TIME_LIMIT = 30 * 1000
 
   const { getEachColor, colors } = useColors()
   const startFlag = ref(false)
@@ -68,31 +67,41 @@ const useCorrectColorGame = () => {
   const next = () => eachColor.value = getEachColor()
 
   return {
+    TIME_LIMIT,
     eachColor,
     play () {
       init()
       startFlag.value = true
+      clearTimeout(setTimeoutID as any)
       setTimeoutID = setInterval(() => {
-        time.value += 1
-      }, 1000)
+        time.value += TIME_INTERVAL
+      }, TIME_INTERVAL)
       next()
     },
     comFlag: computed(() => startFlag.value),
     comTime: computed(() => time.value),
     comPoint: computed(() => point.value),
     next,
-    submit (param: OX) {
+    submit (param: OX): boolean {
       if (param === 'O') {
-        if (colors[eachColor.value.randomColorEng] === eachColor.value.randomColorKor) point.value += 1
-        else {
-          point.value -= 1
-          time.value += 1
+        if (colors[eachColor.value.randomColorEng] === eachColor.value.randomColorKor) {
+          point.value += 1
+          return true
         }
-      } else if (param === 'X') {
-        if (colors[eachColor.value.randomColorEng] !== eachColor.value.randomColorKor) point.value += 1
         else {
           point.value -= 1
           time.value += 1
+          return false
+        }
+      } else {
+        if (colors[eachColor.value.randomColorEng] !== eachColor.value.randomColorKor) {
+          point.value += 1
+          return true
+        }
+        else {
+          point.value -= 1
+          time.value += 1
+          return false
         }
       }
     }
