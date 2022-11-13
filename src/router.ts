@@ -14,6 +14,15 @@ const routes = [
     },
     meta: { hasBottom: true },
   },
+  {
+    path: "/correct-color",
+    name: "CorrectColor",
+    components: {
+      default: () => import("./views/CorrectColor.vue"),
+      bottom: () => import("./components/bottom/TouchPad.vue"),
+    },
+    meta: { hasBottom: true },
+  },
 ]
 
 const router = createRouter({
