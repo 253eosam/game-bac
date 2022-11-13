@@ -60,7 +60,7 @@ export default defineComponent({
       </button>
 
       <h1 class="flex-1 text-center text-white text-2xl font-bold leading-[1.5rem]">
-        <button @click="easterEgg">{{ curRouteName }}</button>
+        <button @click="easterEgg" class="cursor-default">{{ curRouteName }}</button>
       </h1>
 
       <button class="p-0 bg-white text-black mx-1 flex-none" @click="refresh">
