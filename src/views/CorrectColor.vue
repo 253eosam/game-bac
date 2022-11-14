@@ -2,7 +2,11 @@
   <div class="correct-color h-full relative">
     <div v-if="comFlag" class="h-full">
       <p class="absolute top-2 right-2 text-[1.5rem] text-green-500 font-bold">{{ comPoint }} Point</p>
-      <strong class="absolute text-[20rem] top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2" :style="{ 'color': paintColorText }"> {{ showColorText }} </strong>
+      <div class="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2">
+        <div class="relative">
+          <strong class="correct-color-text text-[1700%]" :style="{ 'color': paintColorText }"> {{ showColorText }} </strong>
+        </div>
+      </div>
       <div class="absolute left-2 right-2 bottom-5 flex">
         <progress class="mx-2" min="0" :max="TIME_LIMIT" :value="comTime" />
         <span class="inline-block w-8 mr-3 font-bold" :class="{ 'text-red-500': lastTime <= 10 }">{{ lastTime }}s</span>
@@ -17,7 +21,7 @@
 
 <script lang="ts">
 import { useDeliveryTop } from "@src/hooks/useDeliveryTop"
-import { computed, defineComponent, ref } from "vue"
+import { computed, defineComponent, ref, watch } from "vue"
 import useCorrectColorGame from "../hooks/useCorrectColorGame"
 import delay from '../utils/useDelay';
 
@@ -25,21 +29,30 @@ export default defineComponent({
   setup() {
     const { TIME_LIMIT, eachColor, submit, comFlag, comTime, comPoint, next, play } = useCorrectColorGame()
     const disableDisplay = ref(false)
+    const disableTime = ref(1000)
 
     const doFlagDisplay = async () => {
       const crtColor = document.querySelector('.correct-color')
       const disableDisplayCss = ['pointer-events-none', 'opacity-50']
       disableDisplay.value = true
       crtColor?.classList.add(...disableDisplayCss)
-      await delay(1000)
+      await delay(disableTime.value)
+      disableTime.value+= 500
       crtColor?.classList.remove(...disableDisplayCss)
       disableDisplay.value = false
+    }
+    const obtainPoint = () => {
+    }
+    const lostPoint = () => {
     }
 
     useDeliveryTop(async (ox: "O" | "X") => {
       if (!comFlag.value || disableDisplay.value) return
       const check = submit(ox)
-      if (!check) { await doFlagDisplay() }
+      if (!check) { 
+        lostPoint()
+        await doFlagDisplay() 
+      } else { obtainPoint() }
       next()
     })
 
@@ -75,4 +88,5 @@ progress::-webkit-progress-value {
   background: -webkit-linear-gradient(to right, #93F9B9, #1D976C);
   background: linear-gradient(to right, #93F9B9, #1D976C);
 }
+
 </style>
