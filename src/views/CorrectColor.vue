@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full relative">
+  <div class="correct-color h-full relative">
     <div v-if="comFlag" class="h-full">
       <p class="absolute top-2 right-2 text-[1.5rem] text-green-500 font-bold">{{ comPoint }} Point</p>
       <strong class="absolute text-[20rem] top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2" :style="{ 'color': paintColorText }"> {{ showColorText }} </strong>
@@ -17,15 +17,29 @@
 
 <script lang="ts">
 import { useDeliveryTop } from "@src/hooks/useDeliveryTop"
-import { computed, defineComponent } from "vue"
+import { computed, defineComponent, ref } from "vue"
 import useCorrectColorGame from "../hooks/useCorrectColorGame"
+import delay from '../utils/useDelay';
 
 export default defineComponent({
   setup() {
     const { TIME_LIMIT, eachColor, submit, comFlag, comTime, comPoint, next, play } = useCorrectColorGame()
+    const disableDisplay = ref(false)
 
-    useDeliveryTop((ox: "O" | "X") => {
+    const doFlagDisplay = async () => {
+      const crtColor = document.querySelector('.correct-color')
+      const disableDisplayCss = ['pointer-events-none', 'opacity-50']
+      disableDisplay.value = true
+      crtColor?.classList.add(...disableDisplayCss)
+      await delay(1000)
+      crtColor?.classList.remove(...disableDisplayCss)
+      disableDisplay.value = false
+    }
+
+    useDeliveryTop(async (ox: "O" | "X") => {
+      if (!comFlag.value || disableDisplay.value) return
       const check = submit(ox)
+      if (!check) { await doFlagDisplay() }
       next()
     })
 

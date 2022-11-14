@@ -65,6 +65,8 @@ const useCorrectColorGame = () => {
     }
   })
   const next = () => eachColor.value = getEachColor()
+  const obtainPoint = () => point.value += 1
+  const lostPoint = () => point.value -= 1
 
   return {
     TIME_LIMIT,
@@ -85,22 +87,20 @@ const useCorrectColorGame = () => {
     submit (param: OX): boolean {
       if (param === 'O') {
         if (colors[eachColor.value.randomColorEng] === eachColor.value.randomColorKor) {
-          point.value += 1
+          obtainPoint()
           return true
         }
         else {
-          point.value -= 1
-          time.value += 1
+          lostPoint()
           return false
         }
       } else {
         if (colors[eachColor.value.randomColorEng] !== eachColor.value.randomColorKor) {
-          point.value += 1
+          obtainPoint()
           return true
         }
         else {
-          point.value -= 1
-          time.value += 1
+          lostPoint()
           return false
         }
       }
