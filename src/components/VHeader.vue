@@ -28,7 +28,9 @@ export default defineComponent({
         })
       },
       refresh() {
-        if (router.currentRoute.value.name === 'Baseball') {
+        const routes = ['Baseball', 'CorrectColor']
+        const curRouteName = router.currentRoute.value?.name as string ?? ''
+        if (routes.includes(curRouteName)) {
           router.go(0)
         } else {
           router.push({ path: '/' })

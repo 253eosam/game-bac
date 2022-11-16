@@ -4,7 +4,7 @@
       <p class="absolute top-2 right-2 text-[1.5rem] text-green-500 font-bold">{{ comPoint }} Point</p>
       <div class="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2">
         <div class="relative">
-          <strong class="correct-color-text text-[1700%]" :style="{ 'color': paintColorText }"> {{ showColorText }} </strong>
+          <strong class="correct-color-text text-7xl" :style="{ 'color': paintColorText }"> {{ showColorText }} </strong>
         </div>
       </div>
       <div class="absolute left-2 right-2 bottom-5 flex">
@@ -13,8 +13,8 @@
       </div>
     </div>
     <div v-else class="flex flex-col justify-center items-center h-full">
-      <button class="transition-transform hover:scale-110 border-white border-4 px-14 py-5 rounded-full font-mono text-9xl" @click="play">START</button>
-      <strong v-show="0 < comPoint" class="text-green-500 font-bold text-[5rem]">{{ comPoint }} Point</strong>
+      <button class="transition-transform hover:scale-110 border-white border-4 px-14 py-5 rounded-full font-mono text-5xl" @click="play">START</button>
+      <strong v-show="0 < comPoint" class="text-green-500 font-bold text-3xl mt-4">{{ comPoint }} Point</strong>
     </div>
   </div>
 </template>
