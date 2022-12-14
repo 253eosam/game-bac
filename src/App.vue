@@ -1,17 +1,12 @@
 <template>
-  <VContainer />
+  <AppHeader/>
+  <router-view v-slot="{ Component }">
+      <transition name="bounce">
+        <component :is="Component" />
+      </transition>
+  </router-view>
 </template>
 
-<script lang="ts">
-import VContainer from './components/VContainer.vue'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    VContainer,
-  },
-  setup() {
-    
-  },
-})
+<script setup lang="ts">
+import AppHeader from '@src/layout/components/app_header/index.vue'
 </script>
