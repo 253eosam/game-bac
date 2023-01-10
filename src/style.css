@@ -3,21 +3,24 @@
 @tailwind utilities;
 
 :root {
-  --color: #ffffff;
-  --background: #000000;
+  --primary: #000000;
+  --secondary: #ffffff;
 }
 
 @layer components {
   .sm-icon {
-    @apply h-6 w-6 p-0 bg-[var(--color)] text-[var(--background)];
+    @apply h-6 w-6 p-0 bg-[var(--secondary)] text-[var(--primary)];
+  }
+  .bg-primary {
+    @apply bg-[var(--primary)]
   }
 }
 
 body {
-  color: var(--color);
+  color: var(--secondary);
   min-width: 100vw;
   min-height: 100vh;
-  background: var(--background);
+  background: var(--primary);
 
   -ms-user-select: none; 
   -moz-user-select: -moz-none;
