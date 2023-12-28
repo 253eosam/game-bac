@@ -17,6 +17,7 @@
 import { defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
 import GameSelection from '@src/components/home/GameSelection.vue'
+import COMMON from '@src/common'
 
 type TGameSelection = {
   id: string
@@ -38,7 +39,6 @@ export default defineComponent({
           id: 'Baseball',
           title: '숫자 야구 게임',
           description: `0 ~ 9까지 숫자가 랜덤하게 위치히고 있습니다.<br>각 위치에 맞는 숫자를 맞춰보세요!`,
-          color: 'blue',
           onClickStartGame() {
             push({ name: 'Baseball' })
           },
@@ -47,11 +47,18 @@ export default defineComponent({
           id: 'Correct Color',
           title: '올바른 색깔 맞추기',
           description: `화면에 나오는 글자와 색상이 같으면 빠르게 터치해주세요!`,
-          color: 'pink',
           onClickStartGame() {
             push({ name: 'CorrectColor' })
           },
-        }
+        },
+        {
+          id: COMMON.GAMES[2],
+          title: COMMON.GAMES[2],
+          description: COMMON.GAMES[2],
+          onClickStartGame() {
+            push({ name: COMMON.GAMES[2] })
+          },
+        },
       ] as TGameSelection[],
     }
   },

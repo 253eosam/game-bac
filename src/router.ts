@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router"
+import common from "./common"
+
 const routes = [
   {
     path: "/",
@@ -22,6 +24,14 @@ const routes = [
       bottom: () => import("./components/bottom/TouchPad.vue"),
     },
     meta: { hasBottom: true },
+  },
+  {
+    path: "/new-game",
+    name: common.GAMES[2],
+    components: {
+      default: () => import("./views/NewGame.vue"),
+      bottom: () => import("./components/bottom/TouchPad.vue"),
+    },
   },
 ]
 
