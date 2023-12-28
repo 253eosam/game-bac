@@ -5,7 +5,7 @@ type TMsg = { type: string, content: string }
 const inputValue = ref('')
 const messages = ref<TMsg[]>([])
 const inputRef = ref<HTMLElement | null>(null)
-const ws = new WebSocket("ws://localhost:3000")
+const ws = new WebSocket("ws://dcbd-124-51-94-139.ngrok-free.app/")
 
 ws.addEventListener("message", (event) => {
   try {
