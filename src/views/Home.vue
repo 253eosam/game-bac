@@ -51,14 +51,6 @@ export default defineComponent({
             push({ name: 'CorrectColor' })
           },
         },
-        {
-          id: COMMON.GAMES[2],
-          title: COMMON.GAMES[2],
-          description: COMMON.GAMES[2],
-          onClickStartGame() {
-            push({ name: COMMON.GAMES[2] })
-          },
-        },
       ] as TGameSelection[],
     }
   },

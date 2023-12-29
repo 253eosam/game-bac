@@ -25,14 +25,6 @@ const routes = [
     },
     meta: { hasBottom: true },
   },
-  {
-    path: "/new-game",
-    name: common.GAMES[2],
-    components: {
-      default: () => import("./views/NewGame.vue"),
-      bottom: () => import("./components/bottom/TouchPad.vue"),
-    },
-  },
 ]
 
 const router = createRouter({
